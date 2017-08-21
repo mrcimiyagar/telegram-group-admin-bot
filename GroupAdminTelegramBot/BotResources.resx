@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BotForbidLinkResponse" xml:space="preserve">
+    <value>پیام شما به دلیل داشتن تگ (نشانی کانال ها یا افراد) حذف شد، برای قرار دادن تگ باید دارای عضویت پرمیوم باشید و برای پرمیوم کردن عضویت خود باید 10 نفر را به این گروه بیفزایید. برای کسب اطلاعات بیشتر از نحوه این کار به صفحه ربات ما بروید: @bamahamyeshAdminBot</value>
+  </data>
+  <data name="BotHelpText" xml:space="preserve">
+    <value>با سلام 
+
+شما راهنمای بات را صدا زدید در این راهنما با دستورات بات و قابلیت های آن آشنا خواهیم شد.
+
+دستورات :
+-دستور /create _ selection به مدیر گروه اجازه ایجاد نظرسنجی را میدهد و تمامی کاربران میتوانند در نظرسنجی شرکت کنند
+-دستور /start _ election برای فعالسازی نظرسنجی بعد از انتخاب عنوان و گزینه ها می باشد.
+-دستور /set_silence_time و سپس بازه زمانی به شکل (19:00-20:00 ) برای فعال سازی ساعت سکوت است تا در ساعاتی مشخص کاربران اجازه صحبت کردن را نداشته باشند.
+-دستور /set_invite_link و سپس لینک گروه که برای افزودن گروه به لیست گروه های بات می باشد.
+
+با فعال کردن این بات کاربران عادی مجاز به قرار دادن لینک یا ای دی گروه یا کانال خود نخواهند بود و برای قرار دادن آن باید حساب خود را به حساب پرمیوم تغییر دهند. (برای انتقال به حساب پرمیوم باید 15 نفر را به کانال دعوت کنید)</value>
+  </data>
+  <data name="BotInviteResponse1" xml:space="preserve">
+    <value>لطفا صبر کن تا گروه هایی که توشون عضوی رو بررسی کنم, پیشاپیش از صبرت ممنونم...</value>
+  </data>
+  <data name="BotInviteResponse2" xml:space="preserve">
+    <value>لطفا یکی از گروه های توی این لیست رو انتخاب کن:</value>
+  </data>
+  <data name="BotInviteSystemHelpText" xml:space="preserve">
+    <value>برای افزودن کاربر و ارتقا حساب اعضای گروه باید به صفحه بات (@bamahamyeshAdminBot) بروند و دستور /start و سپس /invite را بزنند. لیستی برای آنها تشکیل میشود که از داخل لیست اسم گروهی که میخواهند کاربر به آن بیافزاینده را کلیک کنند تا دگمه جدیدی ساخته شود.
+
+سپس روی دگمه جدید کلیک کنند و یکی از چت هایی که با دوستان خود داشته آن را انتخاب نمایند.
+
+سپس به صفحه دوست خود منتقل میشوند و اسم گروه بالای بخش چت نمایش داده می شود و با کلیک روی آن دگمه عضویت برای آنها ایجاد خواهد شد</value>
+  </data>
+  <data name="BotPickUserResponse" xml:space="preserve">
+    <value>حالا روی دگمه پایین کلیک کن و سپس یکی از چت های pv خودتو انتخاب کن تا دگمه عضویت تو صفحه دوستت هم تولید بشه</value>
+  </data>
+  <data name="BotSetInviteLinkReponse" xml:space="preserve">
+    <value>با تشکر از اینکه گروه خود را در این بات قراردادید برای کسب اطلاعات بیشتر در مورد نحوه افزودن کاربران جدید به گروه دستور /bot_invitation_tutorials رو وارد کنید.</value>
+  </data>
+  <data name="BotStartResponse" xml:space="preserve">
+    <value>سلام حالت چطوره؟
+لطفا یکی از دستورات زیر را انتخاب کن:
+دستور /invite برای دعوت کاربر جدید به گروه 
+دستور /stats برای دیدن تعداد افرادی که به گروه اضافه کردی</value>
+  </data>
+  <data name="BotStatsResponse2" xml:space="preserve">
+    <value>در لیست زیر امتیاز های شما در هر گروه نشان داده شده است :</value>
+  </data>
+</root>
