@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BotForbidLinkResponse" xml:space="preserve">
-    <value>پیام شما به دلیل داشتن تگ (نشانی کانال ها یا افراد) حذف شد، برای قرار دادن تگ باید دارای عضویت پرمیوم باشید و برای پرمیوم کردن عضویت خود باید 10 نفر را به این گروه بیفزایید. برای کسب اطلاعات بیشتر از نحوه این کار به صفحه ربات ما بروید: @bamahamyeshAdminBot</value>
+    <value>پیام شما به دلیل داشتن تگ (نشانی کانال ها یا افراد) حذف شد، برای قرار دادن تگ باید دارای عضویت پرمیوم باشید و برای پرمیوم کردن عضویت خود باید 10 نفر را به این گروه بیفزایید. این کار را از طریق add member داخل گروه می توانید انجام دهید</value>
   </data>
   <data name="BotHelpText" xml:space="preserve">
     <value>با سلام 

@@ -19,7 +19,7 @@ namespace GroupAdminTelegramBot {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class BotResources {
@@ -61,7 +61,7 @@ namespace GroupAdminTelegramBot {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to پیام شما به دلیل داشتن تگ (نشانی کانال ها یا افراد) حذف شد، برای قرار دادن تگ باید دارای عضویت پرمیوم باشید و برای پرمیوم کردن عضویت خود باید 10 نفر را به این گروه بیفزایید. برای کسب اطلاعات بیشتر از نحوه این کار به صفحه ربات ما بروید: @bamahamyeshAdminBot.
+        ///   Looks up a localized string similar to پیام شما به دلیل داشتن تگ (نشانی کانال ها یا افراد) حذف شد، برای قرار دادن تگ باید دارای عضویت پرمیوم باشید و برای پرمیوم کردن عضویت خود باید 10 نفر را به این گروه بیفزایید. این کار را از طریق add member داخل گروه می توانید انجام دهید.
         /// </summary>
         internal static string BotForbidLinkResponse {
             get {

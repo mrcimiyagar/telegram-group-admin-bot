@@ -48,6 +48,8 @@ namespace GroupAdminTelegramBot
         private const string upgradeUserCommand = "/upgrade";
         private const string switchToUpgradCommand = "/upgrading ";
 
+        private static Regex linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         private static long updateCounter = 0;
 
         static void Main(string[] args)
@@ -113,8 +115,6 @@ namespace GroupAdminTelegramBot
             botClient.OnUpdate += OnUpdateReceived;
         }
 
-        private static Regex linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
         private static void purifyDataSource()
         {
             HashSet<long> deletedGroups = new HashSet<long>();
@@ -170,7 +170,7 @@ namespace GroupAdminTelegramBot
         
         private static void OnUpdateReceived(object sender, UpdateEventArgs uea)
         {
-            Console.WriteLine("Update " + updateCounter++ + " Received !");
+            Console.WriteLine("Update Received " + updateCounter++);
 
             new Thread(() =>
             {
@@ -268,9 +268,8 @@ namespace GroupAdminTelegramBot
 
                                     if (uea.Update.Message.Type == Telegram.Bot.Types.Enums.MessageType.TextMessage && uea.Update.Message.Text != null)
                                     {
-                                        if (linkParser.Matches(uea.Update.Message.Text).Count > 0)//, @"^(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$").Count > 0)
+                                        if (linkParser.Matches(uea.Update.Message.Text).Count > 0)
                                         {
-                                            Console.WriteLine("url detected !!!");
                                             notifyDeletingMemberAdvertiseMessage(uea);
                                             return;
                                         }
@@ -295,13 +294,8 @@ namespace GroupAdminTelegramBot
 
                                                     if (checkGroupExistance(text.Substring(signIndex, counter - signIndex)))
                                                     {
-                                                        Console.WriteLine("hello1");
                                                         notifyDeletingMemberAdvertiseMessage(uea);
                                                         break;
-                                                    }
-                                                    else
-                                                    {
-                                                        Console.WriteLine("hello2");
                                                     }
 
                                                     text = text.Replace(username, " ");
@@ -327,9 +321,8 @@ namespace GroupAdminTelegramBot
                                     }
                                     else if (uea.Update.Message.Caption != null)
                                     {
-                                        if (linkParser.Matches(uea.Update.Message.Caption).Count > 0)//, @"^(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$").Count > 0)
+                                        if (linkParser.Matches(uea.Update.Message.Caption).Count > 0)
                                         {
-                                            Console.WriteLine("url detected !!!");
                                             notifyDeletingMemberAdvertiseMessage(uea);
                                             return;
                                         }
@@ -889,22 +882,17 @@ namespace GroupAdminTelegramBot
 
         private static void notifyLinksSentInGroup(UpdateEventArgs uea, MatchCollection collection)
         {
-            bool crime = false;
-            
             foreach(Match match in collection)
             {
                 try
                 {
-                    int memCount = botClient.GetChatMembersCountAsync(match.Value).Result;
-                    crime = true;
-                    break;
+                    if (checkGroupExistance(match.Value))
+                    {
+                        notifyDeletingMemberAdvertiseMessage(uea);
+                        break;
+                    }
                 }
                 catch (Exception) { }
-            }
-
-            if (crime)
-            {
-                botClient.DeleteMessageAsync(uea.Update.Message.Chat.Id, uea.Update.Message.MessageId);
             }
         }
 
