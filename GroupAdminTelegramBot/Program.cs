@@ -270,7 +270,8 @@ namespace GroupAdminTelegramBot
                                     {
                                         if (linkParser.Matches(uea.Update.Message.Text).Count > 0)
                                         {
-                                            notifyDeletingMemberAdvertiseMessage(uea);
+                                            notifyNonAdminSentLinkToGroup(uea);
+                                            //notifyDeletingMemberAdvertiseMessage(uea);
                                             return;
                                         }
                                         else
@@ -294,7 +295,8 @@ namespace GroupAdminTelegramBot
 
                                                     if (checkGroupExistance(text.Substring(signIndex, counter - signIndex)))
                                                     {
-                                                        notifyDeletingMemberAdvertiseMessage(uea);
+                                                        notifyNonAdminSentLinkToGroup(uea);
+                                                        //notifyDeletingMemberAdvertiseMessage(uea);
                                                         break;
                                                     }
 
@@ -323,7 +325,8 @@ namespace GroupAdminTelegramBot
                                     {
                                         if (linkParser.Matches(uea.Update.Message.Caption).Count > 0)
                                         {
-                                            notifyDeletingMemberAdvertiseMessage(uea);
+                                            notifyNonAdminSentLinkToGroup(uea);
+                                            //notifyDeletingMemberAdvertiseMessage(uea);
                                             return;
                                         }
                                         else
@@ -347,7 +350,8 @@ namespace GroupAdminTelegramBot
 
                                                     if (checkGroupExistance(caption.Substring(signIndex, counter - signIndex)))
                                                     {
-                                                        notifyDeletingMemberAdvertiseMessage(uea);
+                                                        notifyNonAdminSentLinkToGroup(uea);
+                                                        //notifyDeletingMemberAdvertiseMessage(uea);
                                                         break;
                                                     }
 
@@ -775,10 +779,13 @@ namespace GroupAdminTelegramBot
             botClient.EditMessageTextAsync(uea.Update.CallbackQuery.Message.Chat.Id, uea.Update.CallbackQuery.Message.MessageId, "Users Scores List : ", Telegram.Bot.Types.Enums.ParseMode.Default, false, new InlineKeyboardMarkup(keyboardButtons));
         }
 
-        private static void notifyDeletingMemberAdvertiseMessage(UpdateEventArgs uea)
+        private static void notifyNonAdminSentLinkToGroup(UpdateEventArgs uea)
         {
-            botClient.DeleteMessageAsync(uea.Update.Message.Chat.Id.Identifier, uea.Update.Message.MessageId);
-            botClient.SendTextMessageAsync(uea.Update.Message.Chat.Id, "کاربر گرامی " + uea.Update.Message.From.FirstName + " , " + Environment.NewLine + BotResources.BotForbidLinkResponse);
+            if (!linkAllowedUsers[uea.Update.Message.Chat.Id.Identifier].Contains(uea.Update.Message.From.Id.Identifier))
+            {
+                botClient.DeleteMessageAsync(uea.Update.Message.Chat.Id.Identifier, uea.Update.Message.MessageId);
+                botClient.SendTextMessageAsync(uea.Update.Message.Chat.Id, "کاربر گرامی " + uea.Update.Message.From.FirstName + " , " + Environment.NewLine + BotResources.BotForbidLinkResponse);
+            }
         }
 
         private static void notifyUserRequestedBotInviteSystemHelpText(UpdateEventArgs uea)
@@ -852,14 +859,16 @@ namespace GroupAdminTelegramBot
                 {
                     if (enities[counter].Type == Telegram.Bot.Types.Enums.MessageEntityType.Url)
                     {
-                        notifyDeletingMemberAdvertiseMessage(uea);
+                        notifyNonAdminSentLinkToGroup(uea);
+                        //notifyDeletingMemberAdvertiseMessage(uea);
                         break;
                     }
                     else if (enities[counter].Type == Telegram.Bot.Types.Enums.MessageEntityType.Mention)
                     {
                         if (checkGroupExistance(entityValues[counter]))
                         {
-                            notifyDeletingMemberAdvertiseMessage(uea);
+                            notifyNonAdminSentLinkToGroup(uea);
+                            //notifyDeletingMemberAdvertiseMessage(uea);
                             break;
                         }
                     }
@@ -876,22 +885,6 @@ namespace GroupAdminTelegramBot
                 return true;
             }
             catch (Exception ex) { if (ex.ToString().ToLower().Contains("too many requests")) return true; else return false; }
-        }
-
-        private static void notifyLinksSentInGroup(UpdateEventArgs uea, MatchCollection collection)
-        {
-            foreach(Match match in collection)
-            {
-                try
-                {
-                    if (checkGroupExistance(match.Value))
-                    {
-                        notifyDeletingMemberAdvertiseMessage(uea);
-                        break;
-                    }
-                }
-                catch (Exception) { }
-            }
         }
 
         private static void notifyUserPreparingInvite(UpdateEventArgs uea)
