@@ -802,8 +802,6 @@ namespace GroupAdminTelegramBot
 
             long adderUserId = uea.Update.Message.From.Id.Identifier;
 
-            Console.WriteLine("hello " + adderUserId);
-
             if (adderUserId != cm.Id.Identifier)
             {
                 if (!linkAllowedUsers[uea.Update.Message.Chat.Id.Identifier].Contains(adderUserId))
