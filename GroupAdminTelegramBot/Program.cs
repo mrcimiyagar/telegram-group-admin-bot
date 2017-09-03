@@ -14,7 +14,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace GroupAdminTelegramBot
 {
-    class Program
+    public class Program
     {
         private static DatabaseManager dbManager;
 
@@ -31,6 +31,8 @@ namespace GroupAdminTelegramBot
 
         private static Dictionary<long, long> upgradeBusyAdmins;
         private static Dictionary<long, HashSet<string>> upgradePendingUsernames;
+
+        public delegate void CallBotToDestructMessage(int id, long groupId, int messageId);
 
         private static User botUser;
 
@@ -99,6 +101,13 @@ namespace GroupAdminTelegramBot
             invitedsToInviters = dbManager.getOpenedInvitations(new HashSet<long>(botCircleGroups.Keys));
             upgradePendingUsernames = dbManager.getUpgradePendingUsernames(new HashSet<long>(botCircleGroups.Keys));
             startedElections = dbManager.getElectionsList();
+
+            HashSet<Tuple<int, long, int>> desMsgLeft = dbManager.getDestructableMessages();
+
+            foreach (Tuple<int, long, int> desMsg in desMsgLeft)
+            {
+                NotifyBotDestructingMessage(desMsg.Item1, desMsg.Item2, desMsg.Item3);
+            }
 
             usersGroupInviteRequests = new Dictionary<long, long>();
             startPendingElections = new Dictionary<string, Election>();
@@ -779,12 +788,14 @@ namespace GroupAdminTelegramBot
             botClient.EditMessageTextAsync(uea.Update.CallbackQuery.Message.Chat.Id, uea.Update.CallbackQuery.Message.MessageId, "Users Scores List : ", Telegram.Bot.Types.Enums.ParseMode.Default, false, new InlineKeyboardMarkup(keyboardButtons));
         }
 
-        private static void notifyNonAdminSentLinkToGroup(UpdateEventArgs uea)
+        private static async void notifyNonAdminSentLinkToGroup(UpdateEventArgs uea)
         {
             if (!linkAllowedUsers[uea.Update.Message.Chat.Id.Identifier].Contains(uea.Update.Message.From.Id.Identifier))
             {
-                botClient.DeleteMessageAsync(uea.Update.Message.Chat.Id.Identifier, uea.Update.Message.MessageId);
-                botClient.SendTextMessageAsync(uea.Update.Message.Chat.Id, "کاربر گرامی " + uea.Update.Message.From.FirstName + " , " + Environment.NewLine + BotResources.BotForbidLinkResponse);
+                await botClient.DeleteMessageAsync(uea.Update.Message.Chat.Id.Identifier, uea.Update.Message.MessageId);
+                Message message = await botClient.SendTextMessageAsync(uea.Update.Message.Chat.Id, "کاربر گرامی " + uea.Update.Message.From.FirstName + " , " + Environment.NewLine + BotResources.BotForbidLinkResponse);
+                int id = dbManager.addNewDestructableMessage(uea.Update.Message.Chat.Id.Identifier, message.MessageId);
+                new DestructorThread(id, uea.Update.Message.Chat.Id.Identifier, message.MessageId, NotifyBotDestructingMessage);
             }
         }
 
@@ -1249,6 +1260,17 @@ namespace GroupAdminTelegramBot
             }
 
             botClient.SendTextMessageAsync(uea.Update.Message.Chat.Id, BotResources.BotSetInviteLinkReponse);
+        }
+
+        private static void NotifyBotDestructingMessage(int id, long groupId, int messageId)
+        {
+            try
+            {
+                botClient.DeleteMessageAsync(groupId, messageId);
+            }
+            catch(Exception) { }
+
+            dbManager.removeDestructableMessage(id);
         }
     }
 }

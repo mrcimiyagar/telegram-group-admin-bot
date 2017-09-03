@@ -69,38 +69,6 @@ namespace GroupAdminTelegramBot
                         int waitTime = silenceStartTime - currentMillis;
                         Thread.Sleep(waitTime < 0 ? waitTime + 86400000 : waitTime);
                     }
-
-                    /*if (silenceEndTime >= silenceStartTime)
-                    {
-                        if (currentMillis <= this.silenceStartTime)
-                        {
-                            isSilent = false;
-                            Thread.Sleep(this.silenceStartTime - currentMillis);
-                        }
-                        else if (currentMillis >= silenceEndTime)
-                        {
-                            isSilent = false;
-                            Thread.Sleep(86400000 - currentMillis + this.silenceStartTime);
-                        }
-                        else
-                        {
-                            isSilent = true;
-                            Thread.Sleep(this.silenceEndTime - currentMillis);
-                        }
-                    }
-                    else
-                    {
-                        if (currentMillis <= silenceStartTime && currentMillis >= silenceEndTime)
-                        {
-                            isSilent = false;
-                            Thread.Sleep(this.silenceStartTime - currentMillis);
-                        }
-                        else
-                        {
-                            isSilent = true;
-                            Thread.Sleep(this.silenceEndTime - currentMillis);
-                        }
-                    }*/
                 }
             });
 

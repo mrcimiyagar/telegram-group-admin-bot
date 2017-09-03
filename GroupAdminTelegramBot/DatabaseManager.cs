@@ -42,6 +42,9 @@ namespace GroupAdminTelegramBot
             SQLiteCommand command2 = new SQLiteCommand("create table if not exists Elections (election_id integer primary key autoincrement, group_id bigint, user_id bigint);", groupAdminDB);
             command2.ExecuteNonQuery();
 
+            SQLiteCommand command4 = new SQLiteCommand("create table if not exists DestructableMessages (id integer primary key, group_id bigint, message_id integer);", groupAdminDB);
+            command4.ExecuteNonQuery();
+
             SQLiteCommand command3 = new SQLiteCommand("select * from Groups", groupAdminDB);
             SQLiteDataReader reader = command3.ExecuteReader();
 
@@ -58,13 +61,9 @@ namespace GroupAdminTelegramBot
                 SQLiteCommand command7 = new SQLiteCommand("create table if not exists 'AllowedUsers" + groupId + "' (user_id bigint primary key);", groupAdminDB);
                 command7.ExecuteNonQuery();
 
-                /*SQLiteCommand command100 = new SQLiteCommand("drop table if exists 'UpgradePendingUsernames" + groupId + "'", groupAdminDB);
-                command100.ExecuteNonQuery();*/
-
                 SQLiteCommand command8 = new SQLiteCommand("create table if not exists 'UpgradePendingUsernames" + groupId + "' (id integer primary key autoincrement, username var);", groupAdminDB);
                 command8.ExecuteNonQuery();
             }
-
         }
 
         public void addGroup(long groupId)
@@ -236,6 +235,21 @@ namespace GroupAdminTelegramBot
             return result;
         }
 
+        public HashSet<Tuple<int, long, int>> getDestructableMessages()
+        {
+            HashSet<Tuple<int, long, int>> result = new HashSet<Tuple<int, long, int>>();
+
+            SQLiteCommand command0 = new SQLiteCommand("select * from DestructableMessages", groupAdminDB);
+            SQLiteDataReader reader0 = command0.ExecuteReader();
+
+            while (reader0.Read())
+            {
+                result.Add(new Tuple<int, long, int>(Convert.ToInt32(reader0["id"]), Convert.ToInt64(reader0["group_id"]), Convert.ToInt32(reader0["message_id"])));
+            }
+
+            return result;
+        }
+
         public void updateOpenedInviteRequest(long groupId, long inviterId, long invitedId, string messageId)
         {
             lock (groupAdminDB)
@@ -401,6 +415,27 @@ namespace GroupAdminTelegramBot
             command2.ExecuteNonQuery();
 
             File.Delete(@"ElectionsDatabase\" + electionId);
+        }
+
+        public int addNewDestructableMessage(long groupId, int messageId)
+        {
+            int id;
+
+            lock (groupAdminDB)
+            {
+                SQLiteCommand command0 = new SQLiteCommand("insert into DestructableMessages (group_id, message_id) values (" + groupId + ", " + messageId + ");", groupAdminDB);
+                command0.ExecuteNonQuery();
+                SQLiteCommand command1 = new SQLiteCommand("select last_insert_rowid()", groupAdminDB);
+                id = Convert.ToInt32(command1.ExecuteScalar());
+            }
+
+            return id;
+        }
+
+        public void removeDestructableMessage(int id)
+        {
+            SQLiteCommand command0 = new SQLiteCommand("delete from DestructableMessages where id = " + id, groupAdminDB);
+            command0.ExecuteNonQuery();
         }
     }
 }
