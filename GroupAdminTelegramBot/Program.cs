@@ -280,7 +280,6 @@ namespace GroupAdminTelegramBot
                                         if (linkParser.Matches(uea.Update.Message.Text).Count > 0)
                                         {
                                             notifyNonAdminSentLinkToGroup(uea);
-                                            //notifyDeletingMemberAdvertiseMessage(uea);
                                             return;
                                         }
                                         else
@@ -305,7 +304,6 @@ namespace GroupAdminTelegramBot
                                                     if (checkGroupExistance(text.Substring(signIndex, counter - signIndex)))
                                                     {
                                                         notifyNonAdminSentLinkToGroup(uea);
-                                                        //notifyDeletingMemberAdvertiseMessage(uea);
                                                         break;
                                                     }
 
@@ -335,7 +333,6 @@ namespace GroupAdminTelegramBot
                                         if (linkParser.Matches(uea.Update.Message.Caption).Count > 0)
                                         {
                                             notifyNonAdminSentLinkToGroup(uea);
-                                            //notifyDeletingMemberAdvertiseMessage(uea);
                                             return;
                                         }
                                         else
@@ -360,7 +357,6 @@ namespace GroupAdminTelegramBot
                                                     if (checkGroupExistance(caption.Substring(signIndex, counter - signIndex)))
                                                     {
                                                         notifyNonAdminSentLinkToGroup(uea);
-                                                        //notifyDeletingMemberAdvertiseMessage(uea);
                                                         break;
                                                     }
 
@@ -839,7 +835,7 @@ namespace GroupAdminTelegramBot
                                 int oldScore = allowPendingUsers[uea.Update.Message.Chat.Id.Identifier + " " + adderUserId];
                                 allowPendingUsers.Remove(uea.Update.Message.Chat.Id.Identifier + " " + adderUserId);
 
-                                if (oldScore >= 10)
+                                if (oldScore + 1 >= 10)
                                 {
                                     linkAllowedUsers[uea.Update.Message.Chat.Id.Identifier].Add(adderUserId);
                                     dbManager.removeAllowPendingUserScore(uea.Update.Message.Chat.Id.Identifier, adderUserId);
