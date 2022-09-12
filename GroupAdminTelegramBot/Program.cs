@@ -37,7 +37,7 @@ namespace GroupAdminTelegramBot
         private static User botUser;
 
         private static TelegramBotClient botClient;
-        private const string botToken = "404112802:AAE_S_ZGj8zC7173f1SsEoEHvXnLfVH0J2U";
+        private const string botToken = "-";
 
         private const string createCardCommand = "show_group_invite_link ";
         private const string inviterGroupSetCommand = "set_user_group_invite_request ";
